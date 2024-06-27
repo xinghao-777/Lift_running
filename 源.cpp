@@ -308,19 +308,18 @@ typedef struct lift
 							cout << endl;
 							inpeople.erase(it++);
 							move_time = 0;
-						}
-						if (move_time < 25)
-						{
-							break;
+							if (move_time < 25)
+							{
+								break;
+							}
 						}
 					}
 					else
 					{
 						it++;
 					}
-
 				}
-				for (auto it = outpeople.begin(); it != outpeople.end();)//遍历本楼层电梯外找到要出回去的人，将其从链表中转移到电梯内部；
+				for (auto it = outpeople.begin(); it != outpeople.end();)//遍历本楼层电梯外找到要进去的人，将其从链表中转移到电梯内部；
 				{
 					if (it->infloor == floor)
 					{
@@ -386,23 +385,26 @@ typedef struct lift
 		};
 	}
 }Lift;
-
 int main()
 {
 	Lift lift1;
 	int creattime = 50;
 	peoples newpep;
 	lift1.outpeople = creatpoeple(10);
+	cout << "/********************************/" << endl;
+	cout << " \t目前外部等待人员有：\t" << endl;
 	for (auto it = lift1.outpeople.begin(); it != lift1.outpeople.end(); it++)
 	{
-		cout << "（";
+		cout << "（\t";
 		cout << it->infloor + 1;
-		cout << " to ";
+		cout << "楼\t";
+		cout << " to \t";
 		cout << it->outfloor + 1;
-		cout << "）" << endl;
+		cout << "楼\t";
+		cout << "）\t" << endl;
 	}
-	cout << endl;
-	cout << "电梯当前楼层";
+	cout << "/********************************/" << endl;
+	cout << "电梯初始楼层";
 	cout << "[1]" << endl;
 	while (1)
 	{
@@ -418,19 +420,20 @@ int main()
 			creattime += distime(gen);
 			int num = disnum(gen);
 			lift1.outpeople.splice(lift1.outpeople.end(), creatpoeple(num));
-			cout << endl;
-			cout << "目前外部等待人员有：" << endl;
+			cout << "\n/********************************/" << endl;
+			cout << "  新来了人员，目前外部等待人员有：\t" << endl;
 			for (auto it = lift1.outpeople.begin(); it != lift1.outpeople.end(); it++)
 			{
-				cout << "（";
+				cout << "（\t";
 				cout << it->infloor + 1;
-				cout << " to ";
+				cout << "楼\t";
+				cout << " to \t";
 				cout << it->outfloor + 1;
-				cout << "） ";
-				cout << endl;
+				cout << "楼\t";
+				cout << "）\t" << endl;
 			}
+			cout << "/********************************/\n" << endl;
 		}
-
 	}
 	return 0;
 }
